@@ -1,6 +1,15 @@
 package com.celesca.crudapi.entity;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "user")
 public class User {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
     private String firstname;
     private String lastname;
 
@@ -10,6 +19,14 @@ public class User {
     public User(String firstname, String lastname) {
         this.firstname = firstname;
         this.lastname = lastname;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getFirstname() {
