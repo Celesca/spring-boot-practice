@@ -31,4 +31,12 @@ public class UserController {
         return userService.findAll();
     }
 
+    @GetMapping("/users/{userId}")
+    public User getUser(@PathVariable int userId) {
+        User myUser = userService.findById(userId);
+        if (myUser == null) {
+            throw new RuntimeException("User not found");
+        }
+        return myUser;
+    }
 }
