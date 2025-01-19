@@ -1,9 +1,9 @@
 package com.celesca.crudapi.controllers;
 
 import com.celesca.crudapi.entity.User;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.celesca.crudapi.services.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,12 +13,22 @@ import java.util.List;
 @RequestMapping("/api")
 public class UserController {
 
-    @GetMapping("/user")
-    public List<User> getUsers() {
-        List<User> data = new ArrayList<User>();
-        data.add(new User("John", "Doe"));
-        data.add(new User("Jane", "Doe"));
-        return data;
+    public UserService userService;
+
+    @Autowired
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
+
+    @PostMapping("/users")
+    public User addUser(@RequestBody User user) {
+       user.setId(0);
+       return userService.save(user);
+    }
+
+    @GetMapping("/users")
+    public List<User> getAllUsers() {
+        return userService.findAll();
     }
 
 }
