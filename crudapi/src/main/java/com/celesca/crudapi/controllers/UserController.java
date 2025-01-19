@@ -26,4 +26,9 @@ public class UserController {
        return userService.save(user);
     }
 
+    @GetMapping("/users")
+    public List<User> getUsers() {
+        return
+    }
+
 }
