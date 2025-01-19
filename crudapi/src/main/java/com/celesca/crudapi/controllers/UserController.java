@@ -39,4 +39,14 @@ public class UserController {
         }
         return myUser;
     }
+
+    @DeleteMapping("/users/{userId}")
+    public String deleteUser(@PathVariable int userId) {
+        User myUser = userService.findById(userId);
+        if (myUser == null) {
+            throw new RuntimeException("User not found");
+        }
+        userService.deleteById(userId);
+        return "Deleted user id: " + userId;
+    }
 }
